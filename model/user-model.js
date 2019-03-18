@@ -1,41 +1,52 @@
 var db = require('./db');
 
 module.exports={
-
 	get: function(userId, callback){
-		var sql = "select * from user where id=?";
+		var sql = "select * from users where U_ID = ?";
 
 		db.getResult(sql, [userId], function(result){
 			callback(result);
 		});
 	},
 	getAll: function(callback){
-		var sql = "select * from user";
+		var sql = "select * from users";
 		db.getResult(sql, [], function(results){
 			callback(results);
 		});
 	},
 	validate: function(user, callback){
-		var sql = "select * from user where username=? and password=?";
+		var sql = "select * from users where U_ID = ? and U_PASSWORD = ?";
 
 		db.getResult(sql, [user.uname, user.password], function(result){
 			callback(result);
 		});
 	},
 	insert: function(user, callback){
-		var sql = "insert into user values (null, ?,?,?)";
-		db.execute(sql, [user.uname, user.password, user.type], function(status){
+		var sql = "insert into users values (?, ?, ?, ?)";
+		db.execute(sql, [user.uname, user.password, user.type, user.status], function(status){
 			callback(status);
 		});
 	},
 	update: function(user, callback){
-		var sql = "update user set username=?,password=?, type=? where id=?";
-		db.execute(sql, [user.uname, user.password,user.type, user.id], function(status){
+		var sql = "update users set U_ID = ?, U_PASSWORD = ?, U_TYPE = ? where U_ID = ?";
+		db.execute(sql, [user.uname, user.password,user.type, user.uname], function(status){
 			callback(status);
 		});
 	},
 	delete: function(userId, callback){
-		var sql = "delete from user where id=?";
+		var sql = "delete from users where U_ID = ?";
+		db.execute(sql, [userId], function(status){
+			callback(status);
+		});
+	},
+	activateAccount: function(userId, callback){
+		var sql = "update users set U_STATUS = 'VALID' where U_ID = ?";
+		db.execute(sql, [userId], function(status){
+			callback(status);
+		});
+	},
+	deactivateAccount: function(userId, callback){
+		var sql = "update users set U_STATUS = 'INVALID' where U_ID = ?";
 		db.execute(sql, [userId], function(status){
 			callback(status);
 		});

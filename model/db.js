@@ -4,10 +4,8 @@ var config = {
 	host: '127.0.0.1',
 	user: 'root',
 	password: '',
-	database: 'node'
+	database: 'onlinefoodblog'
 };
-
-//var connection = "";
 
 function getConnection(callback){
 	connection = mysql.createConnection(config);
@@ -44,7 +42,6 @@ module.exports= {
 			}
 			connection.end(function(error){
 				console.log('connection ending ...');
-				//console.log('connection ending ...');
 			});
 		});
 	},
@@ -72,7 +69,6 @@ module.exports= {
 			}
 			connection.end(function(error){
 				console.log('connection ending ...');
-				//console.log('connection ending ...');
 			});
 		});
 	}

@@ -4,7 +4,8 @@ var bodyParser 		= require('body-parser');
 var exSession 		= require('express-session');
 var cookieParser 	= require('cookie-parser');
 var login			= require('./controllers/login');
-var home			= require('./controllers/home');
+var admin			= require('./controllers/admin');
+var member 			= require('./controllers/member');
 var logout			= require('./controllers/logout');
 var app  			= express();
 var port 			= 3000;
@@ -17,7 +18,8 @@ app.use(exSession({secret: 'my top secret code', saveUninitialized: true, resave
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use('/login', login);
-app.use('/home', home);
+app.use('/admin', admin);
+app.use('/member', member);
 app.use('/logout', logout);
 app.use('/assets', express.static('ext'));
 

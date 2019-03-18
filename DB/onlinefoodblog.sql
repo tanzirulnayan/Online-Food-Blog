@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2019 at 08:18 AM
+-- Generation Time: Mar 18, 2019 at 02:20 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -35,6 +35,13 @@ CREATE TABLE `admins` (
   `A_EMAIL` varchar(50) NOT NULL,
   `A_IMAGE` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`A_ID`, `A_NAME`, `A_ADDRESS`, `A_EMAIL`, `A_IMAGE`) VALUES
+('nayan', 'Tanzirul Haque Nayan', 'Basundhara', 'nayan@gmail.com', '/pictures/image_1552914959471.png');
 
 -- --------------------------------------------------------
 
@@ -78,6 +85,13 @@ CREATE TABLE `members` (
   `M_IMAGE` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`M_ID`, `M_NAME`, `M_ADDRESS`, `M_EMAIL`, `M_IMAGE`) VALUES
+('jaowat', 'Jaowat Raihan', 'Nikunja', 'jaowat@yahoo.com', '/pictures/image_1552915164439.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -120,6 +134,14 @@ CREATE TABLE `users` (
   `U_TYPE` varchar(7) NOT NULL,
   `U_STATUS` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`U_ID`, `U_PASSWORD`, `U_TYPE`, `U_STATUS`) VALUES
+('jaowat', 'jaowat', 'MEMBER', 'VALID'),
+('nayan', 'nayan', 'ADMIN', 'INVALID');
 
 --
 -- Indexes for dumped tables

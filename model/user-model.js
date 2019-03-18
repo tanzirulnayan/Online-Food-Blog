@@ -17,19 +17,19 @@ module.exports={
 	validate: function(user, callback){
 		var sql = "select * from users where U_ID = ? and U_PASSWORD = ?";
 
-		db.getResult(sql, [user.uname, user.password], function(result){
+		db.getResult(sql, [user.userId, user.password], function(result){
 			callback(result);
 		});
 	},
 	insert: function(user, callback){
 		var sql = "insert into users values (?, ?, ?, ?)";
-		db.execute(sql, [user.uname, user.password, user.type, user.status], function(status){
+		db.execute(sql, [user.userId, user.password, user.type, user.status], function(status){
 			callback(status);
 		});
 	},
 	update: function(user, callback){
 		var sql = "update users set U_ID = ?, U_PASSWORD = ?, U_TYPE = ? where U_ID = ?";
-		db.execute(sql, [user.uname, user.password,user.type, user.uname], function(status){
+		db.execute(sql, [user.userId, user.password,user.type, user.uname], function(status){
 			callback(status);
 		});
 	},

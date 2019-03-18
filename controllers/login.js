@@ -9,15 +9,24 @@ router.get('/', (req, res)=>{
 router.post('/', (req, res)=>{
 	
 	var user ={
-		uname : req.body.uname,
+		userId : req.body.uname,
 		password : req.body.password
 	};
-	
 	userModel.validate(user, function(result){
 		if(result.length > 0){
-			req.session.name = req.body.uname;
-			req.session.uid = result[0].id;
-			res.redirect('/home');
+			req.session.uId = req.body.uname;
+			if(result[0].U_TYPE == "ADMIN" && result[0].U_STATUS == "VALID")
+			{
+				res.redirect('/admin');
+			}
+			else if(result[0].U_TYPE == "MEMBER" && result[0].U_STATUS == "VALID")
+			{
+				res.redirect('/member');
+			}
+			else
+			{
+				res.render("login/index");
+			}
 		}else{
 			res.render("login/index");
 		}

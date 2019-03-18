@@ -20,7 +20,7 @@ module.exports={
 			callback(status);
 		});
 	},
-	update: function(user, callback){
+	update: function(member, callback){
 		var sql = "update members set M_NAME = ?, M_ADDRESS = ?, M_EMAIL = ?, M_IMAGE = ? where M_ID = ?";
 		db.execute(sql, [member.name, member.address, member.email, member.image, member.id], function(status){
 			callback(status);

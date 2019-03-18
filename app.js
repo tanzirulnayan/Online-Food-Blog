@@ -27,7 +27,10 @@ app.use('/assets', express.static('ext'));
 app.use('/pictures', express.static('images'));
 
 //ROUTES
-app.get('/', (req,res)=>res.send('Index page'));
+app.get('/', (req, res)=>{
+	res.render('index');
+});
+
 app.get('/setCookie', (req,res)=>{
 	res.cookie('cookie1', 'first cookie');
 	res.send("done");

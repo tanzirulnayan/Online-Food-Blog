@@ -1,0 +1,31 @@
+{
+  "name": "online_food_blog",
+  "version": "1.0.0",
+  "description": "Consider a “Online Food Blog” where there will be identity of many restaurants along with their wide range of food items. The viewers will get to know many restaurants, get familiar with many dishes and would be able to post reviews about those items belong to some restaurants.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tanzirul Haque Nayan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thnayan69/Online-Food-Blog.git"
+  },
+  "keywords": [
+    "Node"
+  ],
+  "bugs": {
+    "url": "https://github.com/thnayan69/Online-Food-Blog/issues"
+  },
+  "homepage": "https://github.com/thnayan69/Online-Food-Blog#readme"
+}

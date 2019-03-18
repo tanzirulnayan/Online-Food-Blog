@@ -63,6 +63,7 @@ router.post('/admin', (req, res)=>{
             type 	 : "ADMIN",
             status   : "INVALID"
 		};
+		console.log(user);
 		userModel.insert(user, function(success){
 			if(success){
 				var  admin = {

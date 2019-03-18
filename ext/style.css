@@ -23,7 +23,7 @@ text-decoration: none;
 }
 
 li a:hover:not(.active) {
-background-color: #111;
+background-color: #4CAF50;
 }
 
 .active {
@@ -71,4 +71,4 @@ background-color: #4CAF50;
   .dropdown:hover .dropdown-content {display: block;}
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #111;}
+  .dropdown:hover .dropbtn {background-color: #4CAF50;}

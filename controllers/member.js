@@ -3,18 +3,18 @@ var userModel = require.main.require('./model/user-model');
 var router = express.Router();
 
 router.get('*', function(req, res, next){
-		if(req.session.name != null){
-			next();
-		}else{
-			res.redirect('/login');
-		}
+	if(req.session.uId != null){
+		next();
+	}else{
+		res.redirect('/login');
+	}
 });
 
 router.get('/', (req, res)=>{
-		var user = {
-			name: req.session.name
-		};
-		res.render('home/index', user);
+	var user = {
+		name: req.session.uId
+	};
+	res.render('home/index', user);
 });	
 
 
@@ -24,7 +24,7 @@ router.get('/userlist', (req, res)=>{
 		if(results.length > 0){
 			
 			var user = {
-				name: req.session.name,
+				name: req.session.uId,
 				uList: results
 			};
 			res.render('home/userlist', user);
@@ -34,7 +34,7 @@ router.get('/userlist', (req, res)=>{
 
 router.get('/profile', (req, res)=>{
 
-	userModel.get(req.session.uid, function(result){
+	userModel.get(req.session.uId, function(result){
 
 		if(result.length > 0){
 			res.render('home/profile', result[0]);

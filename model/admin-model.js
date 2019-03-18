@@ -21,8 +21,8 @@ module.exports={
 		});
 	},
 	update: function(admin, callback){
-		var sql = "update admins set A_NAME = ?, A_ADDRESS = ?, A_EMAIL = ?, A_IMAGE = ? where A_ID = ?";
-		db.execute(sql, [admin.name, admin.address, admin.email, admin.image, admin.id], function(status){
+		var sql = "update admins set A_NAME = ?, A_ADDRESS = ?, A_EMAIL = ? where A_ID = ?";
+		db.execute(sql, [admin.name, admin.address, admin.email, admin.id], function(status){
 			callback(status);
 		});
 	},

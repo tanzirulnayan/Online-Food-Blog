@@ -1,5 +1,6 @@
 var express = require('express');
 var userModel = require.main.require('./model/user-model');
+var adminModel = require.main.require('./model/admin-model');
 var router = express.Router();
 
 router.get('*', function(req, res, next){
@@ -14,7 +15,7 @@ router.get('/', (req, res)=>{
 	var user = {
 		name: req.session.uId
 	};
-	res.render('home/index', user);
+	res.render('admin/index', user);
 });	
 
 
@@ -33,11 +34,33 @@ router.get('/userlist', (req, res)=>{
 });
 
 router.get('/profile', (req, res)=>{
-
-	userModel.get(req.session.uId, function(result){
-
+	adminModel.get(req.session.uId, function(result){
 		if(result.length > 0){
-			res.render('home/profile', result[0]);
+			res.render('admin/profile', result[0]);
+		}
+	});	
+});
+
+router.get('/editProfile', (req, res)=>{
+	adminModel.get(req.session.uId, function(result){
+		if(result.length > 0){
+			res.render('admin/editProfile', result[0]);
+		}
+	});	
+});
+
+router.post('/editProfile', (req, res)=>{
+	var admin = {
+		id 	 : req.session.uId,
+		name : req.body.name,
+		address : req.body.address,
+		email	: req.body.email
+	}
+	adminModel.update(admin, function(success){
+		if(success){
+			res.redirect('/admin/profile');
+		}else{
+			res.redirect('/admin/editProfile');
 		}
 	});	
 });

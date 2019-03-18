@@ -23,7 +23,7 @@ router.post('/member', (req, res)=>{
 			uname 	 : req.body.username,
 			password : req.body.password,
             type 	 : "MEMBER",
-            status   : "VALID"
+            status   : "INVALID"
 		};
 		userModel.insert(user, function(success){
 			if(success){

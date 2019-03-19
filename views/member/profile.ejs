@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+	<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+</head>
+<body>
+	<ul>
+		<li><a href="/member">Home</a></li>
+		<li style="float:right"><a href="/logout">Log Out</a></li>
+		<li style="float:right">
+			<div class="dropdown">
+				<div class="dropbtn">Profile</div>
+				<div class="dropdown-content">
+					<a href="/member/profile">View Profile</a>
+					<a href="/member/editProfile">Edit Profile</a>
+				</div>
+			</div>
+        </li>
+    </ul>
+    <div align="center" width="80%">
+        <table align="center" width="50%" >
+            <tr>
+                <td width="30%">User Name</td>
+                <td width="10%">:</td>
+                <td width="30%"><%=M_ID%></td>
+                <td width="30%" rowspan="5">
+                    <img align="right" src="<%=M_IMAGE%>" alt="person" height="200px" width="200px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>:</td>
+                <td><%=M_NAME%></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>:</td>
+                <td><%=M_EMAIL%></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>:</td>
+                <td><%=M_ADDRESS%></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

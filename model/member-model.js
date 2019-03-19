@@ -21,8 +21,8 @@ module.exports={
 		});
 	},
 	update: function(member, callback){
-		var sql = "update members set M_NAME = ?, M_ADDRESS = ?, M_EMAIL = ?, M_IMAGE = ? where M_ID = ?";
-		db.execute(sql, [member.name, member.address, member.email, member.image, member.id], function(status){
+		var sql = "update members set M_NAME = ?, M_ADDRESS = ?, M_EMAIL = ? where M_ID = ?";
+		db.execute(sql, [member.name, member.address, member.email, member.id], function(status){
 			callback(status);
 		});
 	},

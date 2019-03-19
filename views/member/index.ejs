@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+</head>
+<body>
+	<ul>
+		<li><a class="active"  href="/member">Home</a></li>
+		<li style="float:right"><a href="/logout">Log Out</a></li>
+		<li style="float:right">
+			<div class="dropdown">
+				<div class="dropbtn">Profile</div>
+				<div class="dropdown-content">
+					<a href="/member/profile">View Profile</a>
+					<a href="/member/editProfile">Edit Profile</a>
+				</div>
+			</div>
+		</li>
+    </ul>
+    <div align="center">
+        <h1>Welcome Home, <%=name%></h1> 
+    </div>
+	<div align="center">
+        <span align="center">
+            <h3>All Restaurants</h3>
+        </span>
+        <table width="80%" >
+            <tr>
+                <th width="10%">Logo</th>
+                <th width="30%">Name</th>
+                <th width="20%">Type</th>
+                <th width="20%">Location</th>
+                <th width="20%">Action</th>
+            </tr>
+    
+            <% for(var i=0; i < restaurantList.length; i++){ %>
+            <tr align="center">
+                <td>
+                    <img align="center" src="<%= restaurantList[i].R_IMAGE %>" alt="logo" height="100px" width="100px"/>
+                </td>
+                <td><%= restaurantList[i].R_NAME %></td>
+                <td><%= restaurantList[i].R_TYPE %></td>
+                <td><%= restaurantList[i].R_LOCATION %></td>
+                <td>
+                    <a href="/member/restaurant/<%= restaurantList[i].R_ID %>">View</a>
+                </td>
+            </tr>
+            <% } %>
+        </table>
+    </div>
+</body>
+</html>

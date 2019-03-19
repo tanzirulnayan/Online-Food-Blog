@@ -171,7 +171,6 @@ router.post('/restaurant/edit/:restaurantId', (req, res)=>{
 		location	: req.body.location,
 		status		: "VALID",
 	};
-	console.log(restaurant);
 	restaurantModel.update(restaurant, function(success){
 		if(success){
 			res.redirect('/admin/restaurants');

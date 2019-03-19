@@ -1,5 +1,6 @@
 var express = require('express');
-var userModel = require.main.require('./model/user-model');
+var memberModel = require.main.require('./model/member-model');
+var restaurantModel = require.main.require('./model/restaurant-model');
 var router = express.Router();
 
 router.get('*', function(req, res, next){
@@ -11,106 +12,54 @@ router.get('*', function(req, res, next){
 });
 
 router.get('/', (req, res)=>{
-	var user = {
-		name: req.session.uId
-	};
-	res.render('home/index', user);
-});	
-
-
-router.get('/userlist', (req, res)=>{
-	
-	userModel.getAll(function(results){
+	restaurantModel.getAll(function(results){
 		if(results.length > 0){
-			
-			var user = {
+			var restaurants = {
 				name: req.session.uId,
-				uList: results
+				restaurantList: results
 			};
-			res.render('home/userlist', user);
+			res.render('member/index', restaurants);
+		}
+		else{
+			var restaurants = {
+				name: req.session.uId,
+				restaurantList: ""
+			};
+			res.render('member/index', restaurants);
 		}
 	});	
-});
+});	
 
 router.get('/profile', (req, res)=>{
-
-	userModel.get(req.session.uId, function(result){
-
+	memberModel.get(req.session.uId, function(result){
 		if(result.length > 0){
-			res.render('home/profile', result[0]);
+			res.render('member/profile', result[0]);
 		}
 	});	
 });
 
-router.get('/adduser', (req, res)=>{
-	res.render('home/adduser');
-});	
-
-router.post('/adduser', (req, res)=>{
-	
-	var user ={
-		uname : req.body.uname,
-		password : req.body.password,
-		type : req.body.type
-	};
-	
-	userModel.insert(user, function(success){
-		if(success){
-			res.redirect('/home/userlist');
-		}else{
-			res.render("/home/adduser");
+router.get('/editProfile', (req, res)=>{
+	memberModel.get(req.session.uId, function(result){
+		if(result.length > 0){
+			res.render('member/editProfile', result[0]);
 		}
-	});
+	});	
 });
 
-router.get('/edit/:id', (req, res)=>{
-
-	userModel.get(req.params.id, function(result){
-		if(result.length >0 ){
-			res.render('home/edit', result[0]);
-		}else{
-			res.redirect('/home/userlist');
-		}
-	});
-});	
-
-router.post('/edit/:id', (req, res)=>{
-	
-	var user ={
-		id: req.params.id,
-		uname : req.body.uname,
-		password : req.body.password,
-		type : req.body.type
-	};
-	
-	userModel.update(user, function(success){
+router.post('/editProfile', (req, res)=>{
+	var member = {
+		id 	 : req.session.uId,
+		name : req.body.name,
+		address : req.body.address,
+		email	: req.body.email
+	}
+	memberModel.update(member, function(success){
 		if(success){
-			res.redirect('/home/userlist');
+			res.redirect('/member/profile');
 		}else{
-			res.render("/home/edit/"+req.params.id);
+			res.redirect('/member/editProfile');
 		}
-	});
+	});	
 });
 
-router.get('/delete/:id', (req, res)=>{
-
-	userModel.get(req.params.id, function(result){
-		if(result.length >0 ){
-			res.render('home/delete', result[0]);
-		}else{
-			res.redirect('/home/userlist');
-		}
-	});
-});	
-
-router.post('/delete/:id', (req, res)=>{
-	
-	userModel.delete(req.params.id, function(success){
-		if(success){
-			res.redirect('/home/userlist');
-		}else{
-			res.redirect("/home/delete/"+req.params.id);
-		}
-	});
-});
 module.exports = router;

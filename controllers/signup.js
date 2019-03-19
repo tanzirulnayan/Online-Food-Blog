@@ -20,11 +20,12 @@ router.post('/member', (req, res)=>{
 	if(req.body.password == req.body.conPassword)
 	{
 		var user={
-			uname 	 : req.body.username,
+			userId 	 : req.body.username,
 			password : req.body.password,
             type 	 : "MEMBER",
             status   : "INVALID"
 		};
+
 		userModel.insert(user, function(success){
 			if(success){
 				var  member = {
@@ -63,7 +64,7 @@ router.post('/admin', (req, res)=>{
             type 	 : "ADMIN",
             status   : "INVALID"
 		};
-		console.log(user);
+
 		userModel.insert(user, function(success){
 			if(success){
 				var  admin = {

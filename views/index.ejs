@@ -3,6 +3,7 @@
     <head>
         <title>Food Blog</title>
         <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
 
     <body>
@@ -25,7 +26,7 @@
             <span align="center">
                 <h3>All Restaurants</h3>
             </span>
-            <table width="80%" >
+            <table width="80%">
                 <tr>
                     <th width="10%">Logo</th>
                     <th width="30%">Name</th>
@@ -33,7 +34,6 @@
                     <th width="20%">Location</th>
                     <th width="20%">Action</th>
                 </tr>
-        
                 <% for(var i=0; i < restaurantList.length; i++){ %>
                 <tr align="center">
                     <td>

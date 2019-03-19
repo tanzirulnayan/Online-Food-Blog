@@ -26,7 +26,7 @@
         </span>
         <table border="1px" width="80%" >
             <tr>
-                <th width="10%">ID</th>
+                <th width="10%">Logo</th>
                 <th width="30%">Name</th>
                 <th width="20%">Type</th>
                 <th width="20%">Location</th>
@@ -35,19 +35,21 @@
     
             <% for(var i=0; i < restaurantList.length; i++){ %>
             <tr>
-                <td><%= restaurantList[i].R_ID %></td>
+                <td>
+                    <img align="center" src="<%= restaurantList[i].R_IMAGE %>" alt="logo" height="100px" width="100px"/>
+                </td>
                 <td><%= restaurantList[i].R_NAME %></td>
                 <td><%= restaurantList[i].R_TYPE %></td>
                 <td><%= restaurantList[i].R_LOCATION %></td>
                 <td>
                     <a href="/admin/restaurant/view/<%= restaurantList[i].R_ID %>">View Menu</a> |
                     <a href="/admin/restaurant/addMenu/<%= restaurantList[i].R_ID %>">Add Menu</a> |
+                    <a href="/admin/restaurant/edit/<%= restaurantList[i].R_ID %>">Edit</a>  |
                     <a href="/admin/restaurant/delete/<%= restaurantList[i].R_ID %>">Delete</a> 
                 </td>
             </tr>
             <% } %>
         </table>
     </div>
-	
 </body>
 </html>

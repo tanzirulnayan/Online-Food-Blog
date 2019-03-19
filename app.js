@@ -9,7 +9,10 @@ var signup			= require('./controllers/signup');
 var login			= require('./controllers/login');
 var admin			= require('./controllers/admin');
 var member 			= require('./controllers/member');
+var restaurant		= require('./controllers/restaurant');
 var logout			= require('./controllers/logout');
+var restaurantModel = require.main.require('./model/restaurant-model');
+var foodModel = require.main.require('./model/food-model');
 var app  			= express();
 var port 			= 3000;
 
@@ -34,12 +37,26 @@ app.use('/login', login);
 app.use('/admin', admin);
 app.use('/member', member);
 app.use('/logout', logout);
+app.use('/restaurant', restaurant);
 app.use('/assets', express.static('ext'));
 app.use('/pictures', express.static('images'));
 
 //ROUTES
 app.get('/', (req, res)=>{
-	res.render('index');
+	restaurantModel.getAll(function(results){
+		if(results.length > 0){
+			var restaurants = {
+				restaurantList: results
+			};
+			res.render('index', restaurants);
+		}
+		else{
+			var restaurants = {
+				restaurantList: ""
+			};
+			res.render('index', restaurants);
+		}
+	});
 });
 
 app.get('/setCookie', (req,res)=>{

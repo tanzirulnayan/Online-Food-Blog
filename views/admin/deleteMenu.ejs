@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete Menu</title>
+	<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+</head>
+<body>
+	<ul>
+		<li><a href="/admin">Home</a></li>
+		<li style="float:right"><a href="/logout">Log Out</a></li>
+		<li style="float:right">
+			<div class="dropdown">
+				<div class="dropbtn">Profile</div>
+				<div class="dropdown-content">
+					<a href="/admin/profile">View Profile</a>
+					<a href="/admin/editProfile">Edit Profile</a>
+				</div>
+			</div>
+        </li>
+        <li style="float:right"><a class="active" href="/admin/restaurants">All Restaurants</a></li>
+        <li style="float:right"><a href="/admin/addRestaurant">Add Restaurant</a></li>
+    </ul>
+    <div align="center">
+        <span align="center">
+            <img align="center" src="<%=F_IMAGE%>" alt="logo" height="200px" width="200px"/>
+        </span>
+        <span align="center">
+            <h2><%=F_TITLE%></h2>
+        </span>
+        <span align="center">
+            <i><%=F_DESCRIPTION%></i>
+        </span>
+        <br/>
+        <span align="center">
+            <h3>Are you sure?</h3>
+        </span>
+        <br/>
+        <form  method="POST" enctype="multipart/form-data" align="center">
+            <input type="submit" value="Delete" />
+        </form>
+    </div>
+</body>
+</html>

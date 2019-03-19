@@ -1,5 +1,4 @@
 var express = require('express');
-var userModel = require.main.require('./model/user-model');
 var adminModel = require.main.require('./model/admin-model');
 var restaurantModel = require.main.require('./model/restaurant-model');
 var foodModel = require.main.require('./model/food-model');
@@ -101,12 +100,29 @@ router.post('/restaurant/addMenu/:restaurantId', (req, res)=>{
 		image		 : "/pictures/" + res.req.file.filename,
 		restaurantId : req.params.restaurantId
 	};
-	
 	foodModel.insert(food, function(success){
 		if(success){
-			res.redirect('/admin/restaurants');
+			res.redirect('/admin/restaurant/view/'+req.params.restaurantId);
 		}else{
 			res.redirect("/admin/restaurant/addMenu/"+req.params.restaurantId);
+		}
+	});
+});
+
+router.get('/restaurant/:restaurantId/menu/delete/:menuId', (req, res)=>{
+	foodModel.get(req.params.menuId, function(result){
+		if(result.length > 0){
+			res.render('admin/deleteMenu', result[0]);
+		}
+	});
+});
+
+router.post('/restaurant/:restaurantId/menu/delete/:menuId', (req, res)=>{
+	foodModel.delete(req.params.menuId, function(success){
+		if(success){
+			res.redirect('/admin/restaurant/view/'+req.params.restaurantId);
+		}else{
+			res.redirect('/admin/restaurant/'+req.params.restaurantId+'/menu/delete/'+req.params.menuId);
 		}
 	});
 });
@@ -116,7 +132,6 @@ router.get('/restaurant/view/:restaurantId', (req, res)=>{
 	restaurantModel.get(req.params.restaurantId, function(result){
 		if(result.length > 0){
 			restaurantDetails = result[0];
-			
 			foodModel.getAllByRestaurantId(req.params.restaurantId, function(results){
 				if(results.length > 0){
 					var menu = {
@@ -133,6 +148,35 @@ router.get('/restaurant/view/:restaurantId', (req, res)=>{
 					res.render('admin/restaurantMenu', menu);
 				}
 			});
+		}
+	});
+});
+
+router.get('/restaurant/edit/:restaurantId', (req, res)=>{
+	restaurantModel.get(req.params.restaurantId, function(result){
+		if(result.length >0 ){
+			res.render('admin/editRestaurant', result[0]);
+		}else{
+			res.redirect('/admin/restaurants');
+		}
+	});
+});	
+
+router.post('/restaurant/edit/:restaurantId', (req, res)=>{
+	var restaurant ={
+		id			: req.body.id,
+		name 		: req.body.name,
+		description : req.body.description,
+		type 		: req.body.type,
+		location	: req.body.location,
+		status		: "VALID",
+	};
+	console.log(restaurant);
+	restaurantModel.update(restaurant, function(success){
+		if(success){
+			res.redirect('/admin/restaurants');
+		}else{
+			res.render("/admin/restaurant/edit/"+req.params.restaurantId);
 		}
 	});
 });
@@ -157,53 +201,4 @@ router.post('/restaurant/delete/:restaurantId', (req, res)=>{
 	});
 });
 
-router.get('/edit/:id', (req, res)=>{
-
-	userModel.get(req.params.id, function(result){
-		if(result.length >0 ){
-			res.render('home/edit', result[0]);
-		}else{
-			res.redirect('/home/userlist');
-		}
-	});
-});	
-
-router.post('/edit/:id', (req, res)=>{
-	
-	var user ={
-		id: req.params.id,
-		uname : req.body.uname,
-		password : req.body.password,
-		type : req.body.type
-	};
-	
-	userModel.update(user, function(success){
-		if(success){
-			res.redirect('/home/userlist');
-		}else{
-			res.render("/home/edit/"+req.params.id);
-		}
-	});
-});
-
-router.get('/delete/:id', (req, res)=>{
-
-	userModel.get(req.params.id, function(result){
-		if(result.length >0 ){
-			res.render('home/delete', result[0]);
-		}else{
-			res.redirect('/home/userlist');
-		}
-	});
-});	
-
-router.post('/delete/:id', (req, res)=>{
-	userModel.delete(req.params.id, function(success){
-		if(success){
-			res.redirect('/home/userlist');
-		}else{
-			res.redirect("/home/delete/"+req.params.id);
-		}
-	});
-});
 module.exports = router;

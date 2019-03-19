@@ -5,20 +5,18 @@
 	<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-	<ul>
-		<li><a href="/admin">Home</a></li>
-		<li style="float:right"><a href="/logout">Log Out</a></li>
-		<li style="float:right">
-			<div class="dropdown">
-				<div class="dropbtn">Profile</div>
-				<div class="dropdown-content">
-					<a href="/admin/profile">View Profile</a>
-					<a href="/admin/editProfile">Edit Profile</a>
-				</div>
-			</div>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li style="float:right"><a href="/login">Log In</a></li>
+        <li style="float:right">
+            <div class="dropdown">
+                <div class="dropbtn">Sign Up</div>
+                <div class="dropdown-content">
+                    <a href="/signup/member">Member</a>
+                    <a href="/signup/admin">Admin</a>
+                </div>
+            </div>
         </li>
-        <li style="float:right"><a class="active" href="/admin/restaurants">All Restaurants</a></li>
-        <li style="float:right"><a href="/admin/addRestaurant">Add Restaurant</a></li>
     </ul>
     <div align="center">
         <span align="center">
@@ -58,7 +56,7 @@
                     <img align="center" src="<%= menuList[i].F_IMAGE %>" alt="logo" height="200px" width="200px"/>
                 </td>
                 <td align="center">
-                    <a href="/admin/restaurant/<%= menuList[i].R_ID %>/menu/delete/<%= menuList[i].F_ID %>">Delete</a>
+                    <a href="/restaurant/<%= menuList[i].R_ID %>/menu/review/<%= menuList[i].F_ID %>">Read Review</a>
                 </td>
             </tr>
             <% } %>

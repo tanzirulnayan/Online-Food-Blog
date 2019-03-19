@@ -3,7 +3,6 @@ var db = require('./db');
 module.exports={
 	get: function(foodId, callback){
 		var sql = "select * from foods where = F_ID = ?";
-
 		db.getResult(sql, [foodId], function(result){
 			callback(result);
 		});
@@ -11,6 +10,12 @@ module.exports={
 	getAll: function(callback){
 		var sql = "select * from foods";
 		db.getResult(sql, [], function(results){
+			callback(results);
+		});
+	},
+	getAllByRestaurantId: function(restaurantId, callback){
+		var sql = "select * from foods where R_ID = ?";
+		db.getResult(sql, [restaurantId], function(results){
 			callback(results);
 		});
 	},

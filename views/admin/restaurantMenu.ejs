@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All Menu</title>
+	<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+</head>
+<body>
+	<ul>
+		<li><a href="/admin">Home</a></li>
+		<li style="float:right"><a href="/logout">Log Out</a></li>
+		<li style="float:right">
+			<div class="dropdown">
+				<div class="dropbtn">Profile</div>
+				<div class="dropdown-content">
+					<a href="/admin/profile">View Profile</a>
+					<a href="/admin/editProfile">Edit Profile</a>
+				</div>
+			</div>
+        </li>
+        <li style="float:right"><a class="active" href="/admin/restaurants">All Restaurants</a></li>
+        <li style="float:right"><a href="/admin/addRestaurant">Add Restaurant</a></li>
+    </ul>
+    <div align="center">
+        <span align="center">
+            <img align="center" src="<%=restaurant.R_IMAGE%>" alt="logo" height="200px" width="200px"/>
+        </span>
+        <span align="center">
+            <h2><%=restaurant.R_NAME%></h2>
+        </span>
+        <span align="center">
+            <i><%=restaurant.R_DESCRIPTION%></i>
+        </span>
+        <br/>
+        <span align="center"><%=restaurant.R_TYPE%></span>
+        <br/>
+        <span align="center"><%=restaurant.R_LOCATION%></span>
+        <br/>
+        <br/>
+        <span align="center">
+            <h3>All Menu</h3>
+        </span>
+        <br/>
+        <table border="1px"width="60%" align="center" >
+            <tr>
+                <th width="10%">ID</th>
+                <th width="20%">Title</th>
+                <th width="30%">Description</th>
+                <th width="30%">Image</th>
+                <th width="10%">Action</th>
+            </tr>
+    
+            <% for(var i=0; i < menuList.length; i++){ %>
+            <tr>
+                <td align="center"><%= menuList[i].F_ID %></td>
+                <td align="center"><%= menuList[i].F_TITLE %></td>
+                <td align="center"><%= menuList[i].F_DESCRIPTION %></td>
+                <td align="center">
+                    <img align="center" src="<%= menuList[i].F_IMAGE %>" alt="logo" height="200px" width="200px"/>
+                </td>
+                <td align="center">
+                    <a href="/admin/restaurant/view/<%= menuList[i].R_ID %>/delete/<%= menuList[i].F_ID %>">Delete</a> |
+                </td>
+            </tr>
+            <% } %>
+        </table>
+    </div>
+</body>
+</html>

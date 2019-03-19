@@ -2,8 +2,7 @@ var db = require('./db');
 
 module.exports={
 	get: function(restaurantId, callback){
-		var sql = "select * from restaurants where =R_ID = ?";
-
+		var sql = "select * from restaurants where R_ID = ?";
 		db.getResult(sql, [restaurantId], function(result){
 			callback(result);
 		});

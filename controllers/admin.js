@@ -1,6 +1,7 @@
 var express = require('express');
 var userModel = require.main.require('./model/user-model');
 var adminModel = require.main.require('./model/admin-model');
+var restaurantModel = require.main.require('./model/restaurant-model');
 var router = express.Router();
 
 router.get('*', function(req, res, next){
@@ -17,21 +18,6 @@ router.get('/', (req, res)=>{
 	};
 	res.render('admin/index', user);
 });	
-
-
-router.get('/userlist', (req, res)=>{
-	
-	userModel.getAll(function(results){
-		if(results.length > 0){
-			
-			var user = {
-				name: req.session.uId,
-				uList: results
-			};
-			res.render('home/userlist', user);
-		}
-	});	
-});
 
 router.get('/profile', (req, res)=>{
 	adminModel.get(req.session.uId, function(result){
@@ -65,23 +51,45 @@ router.post('/editProfile', (req, res)=>{
 	});	
 });
 
-router.get('/adduser', (req, res)=>{
-	res.render('home/adduser');
+router.get('/addRestaurant', (req, res)=>{
+	res.render('admin/addRestaurant');
 });	
 
-router.post('/adduser', (req, res)=>{
+router.post('/addRestaurant', (req, res)=>{
 	
-	var user ={
-		uname : req.body.uname,
-		password : req.body.password,
-		type : req.body.type
+	var restaurant ={
+		name 		: req.body.name,
+		description : req.body.description,
+		type 		: req.body.type,
+		location	: req.body.location,
+		status		: "VALID",
+		image		: "/pictures/" + res.req.file.filename
 	};
 	
-	userModel.insert(user, function(success){
+	restaurantModel.insert(restaurant, function(success){
 		if(success){
-			res.redirect('/home/userlist');
+			res.redirect('/admin/restaurantList');
 		}else{
-			res.render("/home/adduser");
+			res.render("/admin/addRestaurant");
+		}
+	});
+});
+
+router.get('/restaurantList', (req, res)=>{
+	restaurantModel.getAll(function(results){
+		if(results.length > 0){
+			var restaurants = {
+				restaurantList: results
+			};
+			res.render('admin/restaurantList', restaurants);
+		}
+	});	
+});
+
+router.get('/restaurant/addMenu/:restaurantId', (req, res)=>{
+	restaurantModel.get(req.params.restaurantId, function(result){
+		if(result.length > 0){
+			res.render('admin/addMenu', result[0]);
 		}
 	});
 });

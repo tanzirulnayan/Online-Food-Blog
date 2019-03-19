@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Menu</title>
+	<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+</head>
+<body>
+	<ul>
+		<li><a href="/admin">Home</a></li>
+		<li style="float:right"><a href="/logout">Log Out</a></li>
+		<li style="float:right">
+			<div class="dropdown">
+				<div class="dropbtn">Profile</div>
+				<div class="dropdown-content">
+					<a href="/admin/profile">View Profile</a>
+					<a href="/admin/editProfile">Edit Profile</a>
+				</div>
+			</div>
+        </li>
+        <li style="float:right"><a class="active" href="/admin/restaurantList">All Restaurants</a></li>
+        <li style="float:right"><a href="/admin/addRestaurant">Add Restaurant</a></li>
+    </ul>
+    <div align="center">
+        <span align="center">
+            <img align="center" src="<%=R_IMAGE%>" alt="logo" height="200px" width="200px"/>
+        </span>
+        <span align="center">
+            <h2><%=R_NAME%></h2>
+        </span>
+        <span align="center">
+            <i><%=R_DESCRIPTION%></i>
+        </span>
+        <br/>
+        <span align="center"><%=R_TYPE%></span>
+        <br/>
+        <span align="center"><%=R_LOCATION%></span>
+        <br/>
+        <br/>
+        <span align="center">
+            <h3>Add Menu</h3>
+        </span>
+        <br/>
+        <form  method="POST" enctype="multipart/form-data">
+            <table width="30%" align="center">
+                <tr>
+                    <td width="45%">Title</td>
+                    <td width="10%">:</td>
+                    <td width="45%">
+                        <input type="text" name="title" placeholder="Name"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>:</td>
+                    <td>
+                        <input type="text" name="description" placeholder="Description"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td>:</td>
+                    <td>
+                        <input type="file" name="imageFile" accept="image/*"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <input type="hidden" name="restaurantId" value="<%=R_ID%>"/>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="add" value="Add" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

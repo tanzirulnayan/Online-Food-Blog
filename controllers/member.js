@@ -1,6 +1,7 @@
 var express = require('express');
 var memberModel = require.main.require('./model/member-model');
 var foodModel = require.main.require('./model/food-model');
+var foodReviewModel = require.main.require('./model/foodReview-model');
 var restaurantModel = require.main.require('./model/restaurant-model');
 var router = express.Router();
 
@@ -86,6 +87,50 @@ router.get('/restaurant/:restaurantId', (req, res)=>{
 			});
 		}
 	});
+});
+
+router.get('/restaurant/:restaurantId/menu/review/:foodId', (req, res)=>{
+	foodReviewModel.getByFoodId(req.params.foodId, function(results){
+		if(results.length > 0)
+		{
+			var comments = {
+				foodId		: req.params.foodId,
+				commentList : results
+			};
+			res.render('member/foodReview', comments);
+		}
+		else{
+			var comments = {
+				foodId		: req.params.foodId,
+				commentList : ""
+			}
+			res.render('member/foodReview', comments);
+		}
+	});
+});
+
+//AJAX
+router.get('/foodReview/:foodId/:commentText', (req, res)=>{
+	var comment ={
+		memberId : req.session.uId,
+		text : req.params.commentText,
+		time : new Date(),
+		foodId : req.params.examId
+	};
+	foodReviewModel.insert(comment, function(success){
+		if(success){
+			foodReviewModel.getByFoodId(req.params.foodId, function(results){
+				if(results.length > 0)
+				{
+					res.send(results);
+				}
+				else{
+					res.send(results);
+				}
+			});
+		}
+	});
+
 });
 
 module.exports = router;

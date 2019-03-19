@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Review</title>
+    <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+</head>
+<body>
+	<ul>
+		<li><a class="active"  href="/member">Home</a></li>
+		<li style="float:right"><a href="/logout">Log Out</a></li>
+		<li style="float:right">
+			<div class="dropdown">
+				<div class="dropbtn">Profile</div>
+				<div class="dropdown-content">
+					<a href="/member/profile">View Profile</a>
+					<a href="/member/editProfile">Edit Profile</a>
+				</div>
+			</div>
+		</li>
+    </ul>
+    <div align="center" id="show">
+        <table width="80%" >
+            <% for(var i=0; i < commentList.length; i++){ %>
+            <tr>
+                <td>
+                        <b><%= commentList[i].M_ID %></b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i><%= commentList[i].FR_TEXT %></i>
+                </td>
+            </tr>
+            <tr height="15px"></tr>
+            <% } %>
+        </table> 
+        <br/>
+    </div>
+    <form width="40%">
+        <table>
+            <tr>
+                <td>
+                    <input placeholder="comment here" name="text" id="commentText" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" id="commentButton" value="Send"/>
+                    <input type="hidden" id="foodId" value="<%= foodId %>"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+<script>
+    $(document).ready(()=>{
+    $('#commentButton').click(()=>{
+        console.log("test");  
+        var commentText = $('#commentText').val();
+        var foodId      = $('#foodId').val();
+        $.ajax({
+            url: '/member/foodReview/'+foodId+'/'+commentText,
+            success: function(response) {
+                if(response)
+                {
+                    var view = $('#show');
+                    var output = '<table width="80%" >'
+                    for(var i=0; i < response.length; i++){
+                        output += '<tr>\
+                            <td>\
+                                    <b>'+response[i].M_ID+'</b>\
+                            </td>\
+                        </tr>\
+                        <tr>\
+                            <td>\
+                                <i>'+response[i].FR_TEXT+'</i>\
+                            </td>\
+                        </tr>\
+                        <tr height="15px"></tr>\
+                        '}
+                        output += '</table>\
+                        <br/>'
+                        view.html(output);          
+                    }
+                    else{
+                        var views = $('#show');
+    
+                        views.html(
+                            'No message yet!'
+                        )
+                    }
+                }    
+            });
+        });
+    });
+</script>

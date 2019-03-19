@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2019 at 02:20 PM
+-- Generation Time: Mar 19, 2019 at 09:57 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -108,6 +108,13 @@ CREATE TABLE `restaurants` (
   `R_IMAGE` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `restaurants`
+--
+
+INSERT INTO `restaurants` (`R_ID`, `R_NAME`, `R_DESCRIPTION`, `R_TYPE`, `R_LOCATION`, `R_STATUS`, `R_IMAGE`) VALUES
+(1, 'Veggie', 'Veggie is a restaurant that serves primarily, or exclusively, health foods, which may include vegetarian, vegan, raw, macrobiotic, organic, and low-fat menu options.', 'Vegan', 'Banani', 'VALID', '/pictures/image_1552974714005.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -141,7 +148,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`U_ID`, `U_PASSWORD`, `U_TYPE`, `U_STATUS`) VALUES
 ('jaowat', 'jaowat', 'MEMBER', 'VALID'),
-('nayan', 'nayan', 'ADMIN', 'INVALID');
+('nayan', 'nayan', 'ADMIN', 'VALID');
 
 --
 -- Indexes for dumped tables
@@ -209,7 +216,7 @@ ALTER TABLE `food_review`
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `restaurant_review`
